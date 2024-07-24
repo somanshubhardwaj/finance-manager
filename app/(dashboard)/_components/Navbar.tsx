@@ -1,7 +1,7 @@
 import { ModeToggle } from "@/components/Mode";
 import { UserButton } from "@clerk/nextjs";
 import React from "react";
-
+import Link from "next/link";
 const Navbar = () => {
   return (
     <div>
@@ -10,16 +10,13 @@ const Navbar = () => {
         <div className="flex-1 text-muted-foreground hidden md:flex">
           <ul className="flex  space-x-4">
             <li>
-              <a href="/dashboard">Dashboard</a>
+              <Link href="/dashboard">Dashboard</Link>
             </li>
             <li>
-              <a href="/dashboard/transactions">Transactions</a>
+              <Link href="/dashboard/transactions">Transactions</Link>
             </li>
             <li>
-              <a href="/dashboard/categories">Categories</a>
-            </li>
-            <li>
-              <a href="/dashboard/accounts">Accounts</a>
+              <Link href="/dashboard/categories">Categories</Link>
             </li>
           </ul>
         </div>

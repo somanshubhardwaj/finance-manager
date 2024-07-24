@@ -48,6 +48,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { ChartCompo } from "./Chart";
+import AddForm from "./AddForm";
 
 export default function Summary() {
   return (
@@ -56,19 +57,14 @@ export default function Summary() {
         <div className="flex-1 font-bold text-2xl">Dashboard</div>
         <div>
           <Sheet>
-            <SheetTrigger>
-              <Button size="sm" variant="default">
-                Add
-              </Button>
+            <SheetTrigger className="bg-primary px-4 py-1 text-secondary rounded-lg">
+              Add
             </SheetTrigger>
             <SheetContent>
               <SheetHeader>
-                <SheetTitle>Are you absolutely sure?</SheetTitle>
-                <SheetDescription>
-                  This action cannot be undone. This will permanently delete
-                  your account and remove your data from our servers.
-                </SheetDescription>
+                <SheetTitle>Add Transaction</SheetTitle>
               </SheetHeader>
+              <AddForm />
             </SheetContent>
           </Sheet>
         </div>
