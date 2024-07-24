@@ -1,13 +1,60 @@
 generator client {
   provider = "prisma-client-js"
 }
+
 datasource db {
-  provider = "postgresql"
-  url = env("POSTGRES_PRISMA_URL") // uses connection pooling
+  provider  = "postgresql"
+  url       = env("POSTGRES_PRISMA_URL") // uses connection pooling
   directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
 }
 
-model Test {
-  id Int @id @default(autoincrement())
-  name String
+
+
+model User {
+  id          Int           @id @default(autoincrement())
+  userId      String        @unique
+  accounts    Account[]
+  Transaction Transaction[]
+  categories  Category[]
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+}
+
+model Account {
+  id           Int           @id @default(autoincrement())
+  accountName  String
+  userId       Int
+  user         User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  transactions Transaction[]
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+}
+model Category {
+  id        Int     @id @default(autoincrement())
+  name      String
+  userId    Int
+  user      User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  transactions Transaction[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([userId])
+}
+
+model Transaction {
+  id        Int     @id @default(autoincrement())
+  amount    Float
+  title     String
+  remark    String? @default("")
+  categoryId Int
+  category  Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  
+  accountId Int
+  account   Account @relation(fields: [accountId], references: [id], onDelete: Cascade)
+  userId    Int
+  user      User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([accountId])
+  @@index([userId])
+  @@index([categoryId])
 }
