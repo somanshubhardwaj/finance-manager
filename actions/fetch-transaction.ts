@@ -14,6 +14,7 @@ export const fetchTransaction = async () => {
       orderBy: {
         id: "desc",
       },
+      take: 10,
     });
 
     return { status: 200, data: transactions };
