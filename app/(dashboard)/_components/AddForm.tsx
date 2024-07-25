@@ -7,7 +7,6 @@ import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -22,6 +21,8 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
+import { addTransaction } from "@/actions/add-transaction";
+import { toast } from "sonner";
 const formSchema = z.object({
   amount: z.string(),
   title: z.string().min(1, "Title is required"),
@@ -33,16 +34,35 @@ const AddForm = () => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      amount: undefined,
+      amount: "",
       title: "",
       remark: "",
       category: "",
     },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values.amount as unknown as number);
-  }
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    const amount = Number(values.amount);
+    const title = values.title as string;
+    const remark = values.remark as string;
+    const category = values.category as string;
+    console.log({ amount, title, remark, category });
+
+    const promise = await addTransaction({
+      amount,
+      title,
+      remark,
+      category,
+    });
+
+    if (promise.status === 200) {
+      toast.success(promise.data.message);
+    } else {
+      toast.error("Failed to add transaction");
+    }
+
+    form.reset();
+  };
   return (
     <div>
       <Form {...form}>

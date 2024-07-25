@@ -15,5 +15,6 @@ model Transaction {
   remark   String? @default("")
   category String
 
-  userId Int
+  userId    String
+  createdAt DateTime @default(now())
 }
