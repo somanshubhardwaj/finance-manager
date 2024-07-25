@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
 import { ThemeProvider } from "@/components/providers/theme-provider";
+import { Toaster } from "sonner";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -25,7 +26,10 @@ export default function RootLayout({
           disableTransitionOnChange
           storageKey="finance-theme"
         >
-          <ClerkProvider>{children}</ClerkProvider>
+          <ClerkProvider>
+            {children}
+            <Toaster position="bottom-center" />
+          </ClerkProvider>
         </ThemeProvider>
       </body>
     </html>
