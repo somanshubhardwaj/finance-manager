@@ -31,7 +31,6 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { ChartCompo } from "./Chart";
 import AddForm from "./AddForm";
 import { useEffect, useState } from "react";
 import { fetchTransaction } from "@/actions/fetch-transaction";
@@ -40,7 +39,7 @@ import { fetchSummary } from "@/actions/fetch-summary";
 import { rangeSummary } from "@/actions/date-summary";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { format, set } from "date-fns";
+import { format } from "date-fns";
 import { CalendarIcon } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -49,10 +48,8 @@ import { Calendar } from "@/components/ui/calendar";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
-  FormLabel,
   FormMessage,
 } from "@/components/ui/form";
 import {

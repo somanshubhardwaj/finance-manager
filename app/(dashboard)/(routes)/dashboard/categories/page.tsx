@@ -2,7 +2,6 @@
 
 import { useTheme } from "next-themes";
 const page = () => {
-  const { theme } = useTheme();
   return (
     <div className="flex  w-full flex-col pt-11">
       <div className="px-4 md:px-8 flex">
