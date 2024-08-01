@@ -27,7 +27,6 @@ import AddForm from "@/app/(dashboard)/_components/AddForm";
 import { fetchTransaction } from "@/actions/fetch-transaction";
 import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
-
 const page = () => {
   const [data, setData] = useState<any>([]);
 
@@ -65,7 +64,7 @@ const page = () => {
             <Table>
               <TableHeader>
                 <TableRow>
-                  <TableHead>Customer</TableHead>
+                  <TableHead>Title | Remark</TableHead>
                   <TableHead>Category</TableHead>
 
                   <TableHead className="text-right">Amount</TableHead>
@@ -83,7 +82,7 @@ const page = () => {
                     <TableCell>
                       <span
                         className={cn(
-                          "text-sm px-2 py-0.5 rounded-md",
+                          "text-sm px-2 py-0.5 rounded-md text-black font-medium capitalize",
                           transaction.category === "income" && "bg-green-300",
                           transaction.category === "expense" && "bg-red-300",
                           transaction.category === "investment" && "bg-blue-300"
