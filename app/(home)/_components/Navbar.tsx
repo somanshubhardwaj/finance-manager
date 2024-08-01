@@ -1,9 +1,15 @@
 import { ModeToggle } from "@/components/Mode";
 import { Button } from "@/components/ui/button";
-import { SignInButton } from "@clerk/nextjs";
+import {
+  SignInButton,
+  SignOutButton,
+  UserButton,
+  UserProfile,
+} from "@clerk/nextjs";
 import React from "react";
-
+import { useAuth } from "@clerk/nextjs";
 const Navbar = () => {
+  const { userId, isLoaded } = useAuth();
   return (
     <header>
       <nav className="flex py-4">
@@ -11,10 +17,21 @@ const Navbar = () => {
           <span className="text-lg font-semibold">Finance Manger</span>
         </div>
         <div className="flex gap-2">
-          <Button size={"sm"} variant={"ghost"}>
-            <SignInButton mode="redirect" />
-          </Button>
-          <Button size={"sm"}>Sign Up</Button>
+          {userId && isLoaded ? (
+            <>
+              <UserButton />
+              <Button size={"sm"}>
+                <SignOutButton />
+              </Button>
+            </>
+          ) : (
+            <>
+              <Button size={"sm"} variant={"ghost"}>
+                <SignInButton mode="redirect" />
+              </Button>
+              <Button size={"sm"}>Sign Up</Button>
+            </>
+          )}
           <ModeToggle />
         </div>
       </nav>

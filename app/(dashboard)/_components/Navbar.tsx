@@ -15,9 +15,6 @@ const Navbar = () => {
             <li>
               <Link href="/dashboard/transactions">Transactions</Link>
             </li>
-            <li>
-              <Link href="/dashboard/categories">Categories</Link>
-            </li>
           </ul>
         </div>
         <div className="flex justify-center items-center gap-2">
